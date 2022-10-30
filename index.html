@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Galley</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+        }
+        body{
+            background-color: #ccc;
+        }
+        .jumbotron{
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+        }
+        main{
+            margin: 20px auto;
+            width: 600px;
+            border: 5px solid #fff;
+        }
+        .cf::before, .cf::after{
+            display: table;
+            content: "";
+        }
+        .cf::after{
+            clear: both;
+        }
+        
+        .thumb{
+            width: 200px;
+            height: 120px;
+            float: left;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-sizing: border-box;
+        }
+        .thumb:hover{
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        @keyframes fadeIn{
+            to{
+                opacity: 1;
+            }
+        }
+        .fade{
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        .active{
+            opacity: 0.5;
+        }
+        
+    </style>
+</head>
+<body>
+    <main class="container">
+        <img class="jumbotron" src="assets/1.JPG" alt="">
+        <div class="thumbnail cf">
+            <img src="assets/1.JPG" alt="" class="thumb">
+            <img src="assets/2.jpeg" alt="" class="thumb">
+            <img src="assets/3.JPG" alt="" class="thumb">
+            <img src="assets/4.jpeg" alt="" class="thumb">
+            <img src="assets/5.jpeg" alt="" class="thumb">
+            <img src="assets/6.jpeg" alt="" class="thumb">
+        </div>
+    </main>
+    <script>
+        const container = document.querySelector('.container');
+        const jumbotron = document.querySelector('.jumbotron');
+        const thumbs = document.querySelectorAll('.thumb');
+        container.addEventListener('click',(e)=>{ 
+            if(e.target.className === 'thumb'){
+                jumbotron.src = e.target.src;
+                jumbotron.classList.add('fade');
+                setTimeout(()=>{
+                    jumbotron.classList.remove('fade');
+                },500);
+
+                thumbs.forEach((thumb)=>{
+                   thumb.className = 'thumb';
+                });
+
+                e.target.classList.add('active');
+            }
+        })
+
+    </script>
+</body>
+</html>
